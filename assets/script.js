@@ -76,49 +76,51 @@ Saya mau pesan undangan
 
     const linkWA = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
 
-katalog.innerHTML += `
+    katalog.innerHTML += `
 
-<div class="relative">
-
-  <div class="bg-white rounded-2xl shadow-sm hover:shadow-2xl transition duration-300 hover:-translate-y-2 overflow-hidden border border-white/40 backdrop-blur">
-
-    <!-- gambar -->
     <div class="relative">
 
-      <img src="${item.gambar}"
-        class="w-full aspect-[3/4] sm:aspect-[4/5] object-cover">
+      <div class="bg-white rounded-2xl shadow-sm hover:shadow-2xl transition duration-300 hover:-translate-y-2 overflow-hidden border border-white/40 backdrop-blur">
+
+        <!-- gambar -->
+        <div class="relative">
+
+          <img src="${item.gambar}"
+            class="w-full aspect-[3/4] sm:aspect-[4/5] object-cover">
+
+        </div>
+
+        <!-- nama tema -->
+        <div class="px-3 pt-3 text-center text-sm sm:text-base font-semibold">
+          ${item.nama}
+        </div>
+
+        <!-- tombol -->
+        <div class="p-3 flex flex-col gap-2">
+
+          <a href="${item.link}" target="_blank"
+          class="w-full text-center bg-black text-white py-3 rounded-xl text-sm font-semibold active:scale-95 transition">
+
+            Preview
+
+          </a>
+
+          <a href="${linkWA}" target="_blank"
+          class="w-full text-center bg-green-500 text-white py-3 rounded-xl text-sm font-semibold active:scale-95 transition">
+
+            Order
+
+          </a>
+
+        </div>
+
+      </div>
 
     </div>
 
-    <!-- nama tema -->
-    <div class="px-3 pt-3 text-center text-sm sm:text-base font-semibold">
-      ${item.nama}
-    </div>
+    `;
 
-    <!-- tombol -->
-    <div class="p-3 flex flex-col gap-2">
-
-      <a href="${item.link}" target="_blank"
-      class="w-full text-center bg-black text-white py-3 rounded-xl text-sm font-semibold active:scale-95 transition">
-
-        Preview
-
-      </a>
-
-      <a href="${linkWA}" target="_blank"
-      class="w-full text-center bg-green-500 text-white py-3 rounded-xl text-sm font-semibold active:scale-95 transition">
-
-        Order
-
-      </a>
-
-    </div>
-
-  </div>
-
-</div>
-
-`;
+  });
 
   renderPagination();
 }
