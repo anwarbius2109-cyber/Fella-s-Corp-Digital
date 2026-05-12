@@ -16,38 +16,43 @@ fetch("data/katalog.json")
        SEARCH FLEXIBLE
     ========================= */
 
-    const inputCari = document.getElementById("searchInput");
+    const searchInput = document.getElementById("search");
 
-inputCari.addEventListener("input", function () {
+    searchInput.addEventListener("input", function(){
 
-  const keyword = this.value.toLowerCase().trim();
+      const keyword = this.value.toLowerCase().trim();
 
-  halaman = 1;
+      halaman = 1;
 
-  dataAktif = semuaData.filter(item => {
+      // kalau kosong
+      if(keyword === ""){
+        dataAktif = semuaData;
+        tampilkan();
+        return;
+      }
 
-    // PRIORITAS NAMA
-    const namaMatch =
-      item.nama.toLowerCase().includes(keyword);
+      // pecah kata
+      const kataCari = keyword.split(" ");
 
-    // KEYWORD
-    const keywordMatch =
-      item.keyword &&
-      item.keyword.some(k =>
-        k.toLowerCase().includes(keyword)
-      );
+      dataAktif = semuaData.filter(item => {
 
-    // KATEGORI
-    const kategoriMatch =
-      item.kategori.toLowerCase().includes(keyword);
+        // gabungkan semua text
+        const gabung = `
+          ${item.nama || ""}
+          ${item.kategori || ""}
+          ${(item.keyword || []).join(" ")}
+        `.toLowerCase();
 
-    return namaMatch || keywordMatch || kategoriMatch;
+        // flexible search
+        return kataCari.some(kata => 
+          gabung.includes(kata)
+        );
 
-  });
+      });
 
-  tampilkan();
+      tampilkan();
 
-});
+    });
 
   });
 
@@ -227,4 +232,3 @@ fetch("data/porto.json")
       `;
     });
   });
-
